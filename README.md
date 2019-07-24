@@ -22,13 +22,13 @@ cd Adaptive-diverse-capsule-network
 
 Training with default settings:
 ```
-python Adaptive-diverse-capsule-network.py
-```
+    python Adaptive-diverse-capsule-network.py
+
 
 More detailed usage run for help:
 ```
 python Adaptive-diverse-capsule-network.py -h
-```
+
 
 **Step 4. Test a pre-trained Adaptive-diverse-capsule-network model**
 
@@ -36,7 +36,7 @@ Suppose you have trained a model using the above command, then the trained model
 saved to `result/trained_model.h5`. Now just launch the following command to get test results.
 ```
 $ python Adaptive-diverse-capsule-network.py -t -w result/trained_model.h5
-```
+
 It will output the testing accuracy and show the reconstructed images.
 The testing data is same as the validation data. It will be easy to test on new data, 
 just change the code as you want.
