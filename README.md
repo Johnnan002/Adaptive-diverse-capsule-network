@@ -19,12 +19,12 @@ cd Adaptive-diverse-capsule-network
 
 ```
 **Step 3. Train a CapsNetAdaptive-diverse-capsule-network model on CIFAR10**  
-```
+
 Training with default settings:
 ```
     python Adaptive-diverse-capsule-network.py
 
-
+```
 More detailed usage run for help:
 ```
 python Adaptive-diverse-capsule-network.py -h
