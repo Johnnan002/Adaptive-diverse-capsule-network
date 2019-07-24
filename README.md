@@ -14,28 +14,28 @@ pip install keras
 
 **Step 2. Clone this repository to local.**
 ```
-git clone https://github.com/XifengGuo/CapsNet-Keras.git capsnet-keras
-cd capsnet-keras
-```
+git clone https://github.com/Johnnan002/Adaptive-diverse-capsule-network.git Adaptive-diverse-capsule-network
+cd Adaptive-diverse-capsule-network
 
-**Step 3. Train a CapsNet on MNIST**  
+
+**Step 3. Train a CapsNetAdaptive-diverse-capsule-network model on CIFAR10**  
 
 Training with default settings:
 ```
-python capsulenet.py
+python Adaptive-diverse-capsule-network.py
 ```
 
 More detailed usage run for help:
 ```
-python capsulenet.py -h
+python Adaptive-diverse-capsule-network.py -h
 ```
 
-**Step 4. Test a pre-trained CapsNet model**
+**Step 4. Test a pre-trained Adaptive-diverse-capsule-network model**
 
 Suppose you have trained a model using the above command, then the trained model will be
 saved to `result/trained_model.h5`. Now just launch the following command to get test results.
 ```
-$ python capsulenet.py -t -w result/trained_model.h5
+$ python Adaptive-diverse-capsule-network.py -t -w result/trained_model.h5
 ```
 It will output the testing accuracy and show the reconstructed images.
 The testing data is same as the validation data. It will be easy to test on new data, 
@@ -46,15 +46,6 @@ https://pan.baidu.com/s/1sldqQo1
 or
 https://drive.google.com/open?id=1A7pRxH7iWzYZekzr-O0nrwqdUUpUpkik
 
-
-**Step 5. Train on multi gpus**   
-
-This requires `Keras>=2.0.9`. After updating Keras:   
-```
-python capsulenet-multi-gpu.py --gpus 2
-```
-It will automatically train on multi gpus for 50 epochs and then output the performance on test dataset.
-But during training, no validation accuracy is reported.
 
 ## Results
 
