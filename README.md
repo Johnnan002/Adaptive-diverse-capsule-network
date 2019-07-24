@@ -1,6 +1,6 @@
 # Adaptive-diverse-capsule-network
 
-This implement is an improved version of real-valued capsule network from our paper《Cv-CapsNet:complex-valued capsule network》, We introduce an attentional mechanism for fusing of three levels of features by weights.
+This implement is an improved version of real-valued capsule network from our paper《Cv-CapsNet:complex-valued capsule network》, We introduce an attentional mechanism for fusing of three levels of features by weights so as to eliminate the manual setting of capsule dimensions in the coding stage.
 
 ## Usage
 
