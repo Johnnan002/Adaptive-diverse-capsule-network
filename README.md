@@ -1,1 +1,67 @@
 # Adaptive-diverse-capsule-network
+
+This implement is an improved version of real-valued capsule network from our paper《Cv-CapsNet:complex-valued capsule network》, We introduce an attentional mechanism for fusion of three levels of features by weights.
+
+## Usage
+
+**Step 1.
+Install [Keras>=2.0.7](https://github.com/fchollet/keras) 
+with [TensorFlow>=1.2](https://github.com/tensorflow/tensorflow) backend.**
+```
+pip install tensorflow-gpu
+pip install keras
+```
+
+**Step 2. Clone this repository to local.**
+```
+git clone https://github.com/XifengGuo/CapsNet-Keras.git capsnet-keras
+cd capsnet-keras
+```
+
+**Step 3. Train a CapsNet on MNIST**  
+
+Training with default settings:
+```
+python capsulenet.py
+```
+
+More detailed usage run for help:
+```
+python capsulenet.py -h
+```
+
+**Step 4. Test a pre-trained CapsNet model**
+
+Suppose you have trained a model using the above command, then the trained model will be
+saved to `result/trained_model.h5`. Now just launch the following command to get test results.
+```
+$ python capsulenet.py -t -w result/trained_model.h5
+```
+It will output the testing accuracy and show the reconstructed images.
+The testing data is same as the validation data. It will be easy to test on new data, 
+just change the code as you want.
+
+You can also just *download a model I trained* from 
+https://pan.baidu.com/s/1sldqQo1
+or
+https://drive.google.com/open?id=1A7pRxH7iWzYZekzr-O0nrwqdUUpUpkik
+
+
+**Step 5. Train on multi gpus**   
+
+This requires `Keras>=2.0.9`. After updating Keras:   
+```
+python capsulenet-multi-gpu.py --gpus 2
+```
+It will automatically train on multi gpus for 50 epochs and then output the performance on test dataset.
+But during training, no validation accuracy is reported.
+
+## Results
+
+    Validation accuracy > 88.5% after 25 epochs.
+    About 600 seconds per epoch on a single tesla k80 GPU card
+    
+    
+    
+    
+    
