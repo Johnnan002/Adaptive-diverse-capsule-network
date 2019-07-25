@@ -29,7 +29,7 @@ saved to `result/trained_model.h5`. Now just launch the following command to get
 ```
 $ python Adaptive-diverse-capsule-network.py -t -w result/trained_model.h5
 ```
-It will output the testing accuracy and show the reconstructed images.
+It will output the testing accuracy .
 The testing data is same as the validation data. It will be easy to test on new data, 
 just change the code as you want 
 
