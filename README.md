@@ -22,7 +22,7 @@ More detailed usage run for help:
 python Adaptive-diverse-capsule-network.py -h
 ```
 
-**Step 4. Test a pre-trained Adaptive-diverse-capsule-network model**
+**Step 3. Test a pre-trained Adaptive-diverse-capsule-network model**
 
 Suppose you have trained a model using the above command, then the trained model will be
 saved to `result/trained_model.h5`. Now just launch the following command to get test results.
