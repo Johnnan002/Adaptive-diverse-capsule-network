@@ -1,24 +1,16 @@
 # Adaptive-diverse-capsule-network
 
-This implement is an improved version of real-valued capsule network from our paper《Cv-CapsNet:complex-valued capsule network》, We introduce an attentional mechanism for fusing of three levels of features by weights so as to eliminate the manual setting of capsule dimensions in the coding stage.
+This implement is an improved version of real-valued capsule network from our paper《Cv-CapsNet:complex-valued capsule network》, We introduce an attentional mechanism for fusing of three levels of features by weights so as to eliminate the manual setting of capsule dimensions in the coding stage. we also use the bottleneck from the MobilenetV3 to improve it.
 
 ## Usage
 
-**Step 1.
-Install [Keras>=2.0.7](https://github.com/fchollet/keras) 
-with [TensorFlow>=1.2](https://github.com/tensorflow/tensorflow) backend.**
+**Step 1. Clone this repository to local.**
 ```
-pip install tensorflow-gpu
-pip install keras
-
-```
-**Step 2. Clone this repository to local.**
-```
-git clone https://github.com/Johnnan002/Adaptive-diverse-capsule-network.git Adaptive-diverse-capsule-network
+git clone https://github.com/Johnnan002/Adaptive-diverse-capsule-network.git 
 cd Adaptive-diverse-capsule-network
 
 ```
-**Step 3. Train a CapsNetAdaptive-diverse-capsule-network model on CIFAR10**  
+**Step 2. Train a CapsNetAdaptive-diverse-capsule-network model on CIFAR10**  
 
 Training with default settings:
 ```
@@ -39,13 +31,7 @@ $ python Adaptive-diverse-capsule-network.py -t -w result/trained_model.h5
 ```
 It will output the testing accuracy and show the reconstructed images.
 The testing data is same as the validation data. It will be easy to test on new data, 
-just change the code as you want.
-
-You can also just *download a model I trained* from 
-https://pan.baidu.com/s/1sldqQo1
-or
-https://drive.google.com/open?id=1A7pRxH7iWzYZekzr-O0nrwqdUUpUpkik
-
+just change the code as you want 
 
 ## Results
 
