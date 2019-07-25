@@ -6,7 +6,7 @@ This implement is an improved version of real-valued capsule network from our pa
 
 **Step 1. Clone this repository to local.**
 ```
-git clone https://github.com/Johnnan002/Adaptive-diverse-capsule-network.git 
+git clone https://github.com/Johnnan002/Adaptive-diverse-capsule-network
 cd Adaptive-diverse-capsule-network
 
 ```
