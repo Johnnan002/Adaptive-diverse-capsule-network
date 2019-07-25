@@ -26,7 +26,7 @@ from keras import backend as K
 K.set_image_data_format('channels_last')
 concat_axis = 1 if K.image_data_format() == 'channels_first' else -1
 
-
+# Mobilenet V3 bottleneck 模块  
 def bottleneck( inputs, filters, kernel, e, s, squeeze, nl):
         """Bottleneck
         This function defines a basic bottleneck structure.
@@ -54,6 +54,7 @@ def bottleneck( inputs, filters, kernel, e, s, squeeze, nl):
             """Hard swish
             """
             return x * K.relu(x + 3.0, max_value=6.0) / 6.0
+        
         def _return_activation(x, nl):
             """Convolution Block
             This function defines a activation choice.
@@ -70,6 +71,7 @@ def bottleneck( inputs, filters, kernel, e, s, squeeze, nl):
             if nl == 'RE':
                 x = Activation(_relu6)(x)
             return x
+           
         def _conv_block( inputs, filters, kernel, strides, nl):
             """Convolution Block
             This function defines a 2D convolution operation with BN and activation.
@@ -92,8 +94,6 @@ def bottleneck( inputs, filters, kernel, e, s, squeeze, nl):
             x = BatchNormalization(axis=channel_axis)(x)
             return _return_activation(x, nl)
 
-
-
         def _squeeze( inputs):
             """Squeeze and Excitation.
             This function defines a squeeze structure.
@@ -106,6 +106,8 @@ def bottleneck( inputs, filters, kernel, e, s, squeeze, nl):
             x = Dense(input_channels, activation='relu')(x)
             x = Dense(input_channels, activation='hard_sigmoid')(x)
             return x
+           
+           
         channel_axis = 1 if K.image_data_format() == 'channels_first' else -1
         input_shape = K.int_shape(inputs)
         tchannel = input_shape[channel_axis] * e
@@ -122,16 +124,15 @@ def bottleneck( inputs, filters, kernel, e, s, squeeze, nl):
 
 
 
+       
+       
 def Global_Average_Pooling(x):
     return global_avg_pool(x, name='Global_avg_pooling')
-
 def Fully_connected(x, units, layer_name='fully_connected') :
     with tf.name_scope(layer_name) :
         return tf.layers.dense(inputs=x, use_bias=True, units=units)
-
 def Relu(x):
     return tf.nn.relu(x)
-
 def Sigmoid(x):
     return tf.nn.sigmoid(x)
 
@@ -157,13 +158,13 @@ class Length(layers.Layer):
 
 def squash(vectors, axis=-1):
     """
-    The non-linear activation used in Capsule. It drives the length of a large vector to near 1 and small vector to 0
+     #squash() 是对向量长度进行归一化，防止向量长度大于1 
     :param vectors: some vectors to be squashed, N-dim tensor
     :param axis: the axis to squash
     :return: a Tensor with same shape as input vectors
     """
     s_squared_norm = K.sum(K.square(vectors), axis, keepdims=True)
-    scale = s_squared_norm / (1 + s_squared_norm) / K.sqrt(s_squared_norm + K.epsilon())#  试试 这个 0.5
+    scale = s_squared_norm / (1 + s_squared_norm) / K.sqrt(s_squared_norm + K.epsilon()) # 分母中的 1，试试0.5
     return scale * vectors
 
 
@@ -274,7 +275,7 @@ def PrimaryCap(inputs, dim_capsule, n_channels, kernel_size, strides, padding):
     """
     def Squeeze_excitation_layer( input_x, out_dim, ratio, layer_name):
         with tf.name_scope(layer_name):
-            squeeze = Global_Average_Pooling(input_x)
+            squeeze = Global_Average_Pooling(input_x)#对spatial 取平均响应强度反映整个feature的激活程度
             excitation= layers.Dense( units=int(out_dim/ratio))(squeeze)
             excitation = layers.Activation('relu')(excitation)
             excitation = layers.Dense(units=out_dim)(excitation)
@@ -283,7 +284,8 @@ def PrimaryCap(inputs, dim_capsule, n_channels, kernel_size, strides, padding):
             excitation = Sigmoid(excitation)
             excitation = layers.Reshape(target_shape=(-1, 1))(excitation)
             return excitation
-
+           
+    #这里利用strides=2 实现降采样 
     output = BatchNormalization(axis=-1)(inputs)
     output = layers.Activation('relu')(output)
     output1 = layers.Conv2D(filters=dim_capsule*n_channels, kernel_size=kernel_size, strides=strides, padding=padding,
@@ -293,11 +295,18 @@ def PrimaryCap(inputs, dim_capsule, n_channels, kernel_size, strides, padding):
     data_size = int(inputs.get_shape()[1])
     strides = strides[0]
     data_size = int(np.floor((data_size - kernel_size)/strides +1))
+ 
     outputs = layers.Reshape(target_shape=(-1, dim_capsule))(output1)
     #outputs =  tf.reshape(output1,[-1,data_size,data_size,n_channels, dim_capsule ])
+   
+    # 胶囊网络向量长度其实反映采样对区域的一个激活强度 也是一种attention机制 
+    #这里先对胶囊取长度再对channel-wise取mean  作为整个区域的激活强度
     length=K.sqrt(K.sum(K.square(outputs ), -1))
     length =layers.Reshape(target_shape=(data_size,data_size,n_channels))(length)
     #length=tf.reshape(length,[-1,data_size,data_size,n_channels ])
+    #SE模块 学习权重系数a
     a=Squeeze_excitation_layer(input_x=length, out_dim=n_channels, ratio=5, layer_name="se")
+    
+    
     return output1,layers.Lambda(squash)(outputs),a
 
