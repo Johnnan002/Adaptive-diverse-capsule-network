@@ -75,7 +75,7 @@ def CapsNet(input_shape, n_class, routings):
     input1,primarycaps1,a1 = PrimaryCap(m_8,dim_capsule=12, n_channels=10, kernel_size=5, strides=(2,2), padding='valid')
 
 
-    ################################################################################################
+    #################################################level1 低层特征提取分支###############################################
 
 
     l2_1=   bottleneck(input1, 32, (3, 3), e=1, s=1, squeeze=False, nl='RE')
@@ -104,7 +104,7 @@ def CapsNet(input_shape, n_class, routings):
 
     input2, primarycaps2 ,a2= PrimaryCap(m2_8, dim_capsule=12, n_channels=10, kernel_size=5, strides=(2, 2), padding='valid')
 
-################################################################################################
+###########################################level2 中层特征提取分支##################################################
     l3_1 =  bottleneck(input2, 32, (3, 3), e=1, s=1, squeeze=False, nl='RE')
     m3_1 = concatenate([input2,  l3_1], axis=concat_axis)
 
@@ -130,13 +130,15 @@ def CapsNet(input_shape, n_class, routings):
     m3_8 = concatenate([m3_7,l3_8], axis=concat_axis)
 
     input3, primarycaps3 ,a3= PrimaryCap(m3_8, dim_capsule=12, n_channels=10, kernel_size=3, strides=(1, 1), padding='valid')
-    ################################################################################################
+    ##################################################level3 高层特征提取分支##############################################
 
 
     primarycaps1=layers.Reshape(target_shape=(-1, 12), name='primarycaps11')(primarycaps1)
     primarycaps2=layers.Reshape(target_shape=(-1, 12), name='primarycaps21')(primarycaps2)
     primarycaps3 = layers.Reshape(target_shape=(-1,12), name='primarycaps31')(primarycaps3)
-
+    
+    #低层  中层 高层 特征编码到相同维度12D  经过路由层降维到6D 通过SE模块学到的参数，将三层特征进行加权融合，
+    #避免了低层 中层 高层手动设置不同维度胶囊来平衡各层级特征。这里通过SE模块学的参数来进行平衡。
     digitcaps2= CapsuleLayer(num_capsule=n_class, dim_capsule=6, routings=routings,
                              name='digitcaps2')(primarycaps1)
     digitcaps3= CapsuleLayer(num_capsule=n_class, dim_capsule=6, routings=routings,
@@ -146,7 +148,7 @@ def CapsNet(input_shape, n_class, routings):
                              name='digitcaps4')(primarycaps3)
 
     digitcaps2 = layers.Reshape(target_shape=(-1, 6), name='digitcaps21')(digitcaps2)
-    a1 = K.tile(a1, [1,10, 6])
+    a1 = K.tile(a1, [1,10, 6])#加权系数a1 
     weight_1 = Lambda(lambda x: x * a1)
     digitcaps2 = weight_1(digitcaps2)
 
@@ -164,7 +166,7 @@ def CapsNet(input_shape, n_class, routings):
     digitcaps4 = weight_3(digitcaps4)
 
 
-    digitcaps = concatenate([ digitcaps2, digitcaps3], axis=-1)
+    digitcaps = concatenate([ digitcaps2, digitcaps3], axis=-1)#加权后拼接成最终的胶囊
     digitcaps = concatenate([ digitcaps, digitcaps4], axis=-1)
 
     digitcaps = layers.Lambda(squash)(digitcaps)
@@ -184,6 +186,7 @@ def margin_loss(y_true, y_pred):
     :param y_pred: [None, num_capsule]
     :return: a scalar loss value.
     """
+    #如果标签为0 则预测概率不能离0.1 太远 否则loss大  如果标签为1 则预测概率不能离0.9太远 否则loss大 
     L = y_true * K.square(K.maximum(0., 0.9 - y_pred)) + \
         0.5 * (1 - y_true) * K.square(K.maximum(0., y_pred - 0.1))
     return K.mean(K.sum(L, 1))
