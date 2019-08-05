@@ -14,12 +14,12 @@ cd Adaptive-diverse-capsule-network
 
 Training with default settings:
 ```
-python Adaptive-diverse-capsule-network.py
+$ python Adaptive-diverse-capsule-network.py
 
 ```
 More detailed usage run for help:
 ```
-python Adaptive-diverse-capsule-network.py -h
+$ python Adaptive-diverse-capsule-network.py -h
 ```
 
 **Step 3. Test a pre-trained Adaptive-diverse-capsule-network model**
