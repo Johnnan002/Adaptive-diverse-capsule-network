@@ -38,7 +38,18 @@ just change the code as you want
     Validation accuracy > 88.5% after 25 epochs.
     About 600 seconds per epoch on a single tesla k80 GPU card
     
-    
-    
+if you ues code or the idea of this repository, please cites as：  
+
+@ARTICLE{8744220, 
+author={X. {Cheng} and J. {He} and J. {He} and H. {Xu}}, 
+journal={IEEE Access}, 
+title={Cv-CapsNet: Complex-Valued Capsule Network}, 
+year={2019}, 
+volume={7}, 
+number={}, 
+pages={85492-85499},  
+doi={10.1109/ACCESS.2019.2924548}, 
+ISSN={2169-3536}, 
+month={},}
     
     
