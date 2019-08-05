@@ -14,7 +14,7 @@ cd Adaptive-diverse-capsule-network
 
 Training with default settings:
 ```
-    python Adaptive-diverse-capsule-network.py
+python Adaptive-diverse-capsule-network.py
 
 ```
 More detailed usage run for help:
