@@ -38,8 +38,8 @@ just change the code as you want
     Validation accuracy > 88.5% after 25 epochs.
     About 600 seconds per epoch on a single tesla k80 GPU card
     
-if you ues code or the idea of this repository, please cites as：  
-
+If you use the code in your research or wish to refer to the baseline results published in the Model , please use the following BibTeX entry. 
+```
 @ARTICLE{8744220, 
 author={X. {Cheng} and J. {He} and J. {He} and H. {Xu}}, 
 journal={IEEE Access}, 
