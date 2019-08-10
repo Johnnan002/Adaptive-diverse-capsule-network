@@ -10,7 +10,7 @@ git clone https://github.com/Johnnan002/Adaptive-diverse-capsule-network
 cd Adaptive-diverse-capsule-network
 
 ```
-**Step 2. Train a CapsNetAdaptive-diverse-capsule-network model on CIFAR10**  
+**Step 2. Train the Adaptive-diverse-capsule-network model on CIFAR10**  
 
 Training with default settings:
 ```
