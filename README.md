@@ -37,7 +37,19 @@ just change the code as you want
 
     Validation accuracy > 88.5% after 25 epochs.
     About 600 seconds per epoch on a single tesla k80 GPU card
+     ________________________________________________________________________________________
+    |        Models         |     Parameters      |  Accuracy(25epoch) |       upgrade       |
+    |———————————————————————|—————————————————————|————————————————————|—————————————————————|
+    |     original model    |       7.99M         |       71.56%       |        —— ——        |
+    |———————————————————————|—————————————————————|————————————————————|—————————————————————|
+    |     diverse-model     |       5.3M          |       86.7%        |      ↑ 15.14%       |
+    |———————————————————————|—————————————————————|————————————————————|—————————————————————|
+    |attention-diverse-model|       5.3M          |       87.8%        |      ↑ 16.24%       |
+    |———————————————————————|—————————————————————|————————————————————|—————————————————————|
+    | adaptive-diverse-model|       5.3M          |       88.5%        |      ↑ 16.94%       |   
+    |_______________________|_____________________|____________________|_____________________|
     
+      
 If you use the code in your research or wish to refer to the baseline results published in the Model , please use the following BibTeX entry. 
 ```
 @ARTICLE{8744220, 
