@@ -1,6 +1,6 @@
 # Adaptive-diverse-capsule-network
 
-This implement is an improved version of real-valued capsule network from our paper《Cv-CapsNet:complex-valued capsule network》 url:https://ieeexplore.ieee.org/document/8744220. In this implement, a multi-scale feature fusion mechanism based on attention is proposed, which eliminates the manual setting of capsule size in coding stage, we also use the bottleneck from the MobilenetV3 to improve it.
+This implement is an improved version of real-valued capsule network from our paper《Cv-CapsNet:complex-valued capsule network》 url:https://ieeexplore.ieee.org/document/8744220. In this implement, a multi-scale feature fusion mechanism based on attention is proposed, named adaptive-diverse-model, which eliminates the manual setting of capsule size in coding stage,  we also use the bottleneck from the MobilenetV3 to improve it(adaptive-diverse-model+). results of ablation research can be seen in Results.
 
 ## Usage
 
@@ -44,9 +44,9 @@ just change the code as you want
     |———————————————————————|—————————————————————|————————————————————|—————————————————————|
     |     diverse-model     |       5.3M          |       86.7%        |      ↑ 15.14%       |
     |———————————————————————|—————————————————————|————————————————————|—————————————————————|
-    |attention-diverse-model|       5.3M          |       87.8%        |      ↑ 16.24%       |
+    | adaptive-diverse-model|       5.3M          |       87.8%        |      ↑ 16.24%       |
     |———————————————————————|—————————————————————|————————————————————|—————————————————————|
-    | adaptive-diverse-model|       5.3M          |       88.5%        |      ↑ 16.94%       |   
+    |adaptive-diverse-model+|       5.3M          |       88.5%        |      ↑ 16.94%       |   
     |_______________________|_____________________|____________________|_____________________|
     
       
