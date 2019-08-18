@@ -1,6 +1,6 @@
 # Adaptive-diverse-capsule-network
 
-This implement is an improved version of real-valued capsule network from our paper《Cv-CapsNet:complex-valued capsule network》， In this implement, a multi-scale feature fusion mechanism based on attention is proposed, named adaptive-diverse-model, which eliminates the manual setting of capsule size in coding stage,  we also use the bottleneck from the MobilenetV3 to improve it(adaptive-diverse-model+). results of ablation research can be seen in Results.
+This implement is an improved version of real-valued capsule network from our paper《Cv-CapsNet:complex-valued capsule network》 URL:https://ieeexplore.ieee.org/document/8744220， In this implement, a multi-scale feature fusion mechanism based on attention is proposed, named adaptive-diverse-model, which eliminates the manual setting of capsule size in coding stage,  we also use the bottleneck from the MobilenetV3 to improve it(adaptive-diverse-model+). results of ablation research can be seen in Results.
 
 ## Usage
 
