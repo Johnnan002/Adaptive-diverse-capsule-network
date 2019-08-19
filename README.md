@@ -1,6 +1,6 @@
 # Adaptive-diverse-capsule-network
 
-This implement is an improved version of real-valued capsule network from our paper《Cv-CapsNet:complex-valued capsule network》 URL:https://ieeexplore.ieee.org/document/8744220， In this implement, a multi-scale feature fusion mechanism based on attention is proposed, named adaptive-diverse-model, which eliminates the manual setting of capsule size in coding stage,  we also use the bottleneck from the MobilenetV3 to improve it(adaptive-diverse-model+). results of ablation research can be seen in Results. In the meantime, as soon as the work is patented, make a declaration if the code is needed.
+This implement is an improved version of real-valued capsule network from our paper《Cv-CapsNet:complex-valued capsule network》 URL:https://ieeexplore.ieee.org/document/8744220， In this implement, a multi-scale feature fusion mechanism based on attention is proposed, named adaptive-diverse-model, which eliminates the manual setting of capsule size in coding stage,  we also use the bottleneck from the MobilenetV3 to improve it(adaptive-diverse-model+). results of ablation research can be seen in Results. In the meantime, this work has been patented, make a declaration if the code is needed.
 
 ## Usage
 
@@ -35,7 +35,7 @@ just change the code as you want
 
 ## Results
 
-    Validation accuracy > 88.5% after 25 epochs.
+    Validation accuracy > 88.5% after 25 epochs on CIFAR10.
     About 600 seconds per epoch on a single tesla k80 GPU card
      ________________________________________________________________________________________
     |        Models         |     Parameters      |  Accuracy(25epoch) |       upgrade       |
